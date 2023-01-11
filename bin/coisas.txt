@@ -1,0 +1,7 @@
+preto chão
+branco parede
+vermelho inimigo
+"vinho" maçã
+amarelo arma
+verde item de cura
+rosa munição
