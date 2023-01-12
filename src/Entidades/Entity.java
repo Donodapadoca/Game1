@@ -19,15 +19,15 @@ public class Entity {
         this.sprite = sprite;
     }
 
-    public void setX(int newX) {
-        this.x = newX;
+    // public void setX(int newX) {
+    // this.x = newX;
 
-    }
+    // }
 
-    public void setY(int newY) {
-        this.y = newY;
+    // public void setY(int newY) {
+    // this.y = newY;
 
-    }
+    // }
 
     public int getX() {
         return (int) this.x;
