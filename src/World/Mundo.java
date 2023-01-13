@@ -24,24 +24,23 @@ public class Mundo {
                     int atualpix = pix[xx + (yy * mapinha.getWidth())];
 
                     if (atualpix == 0xFF000000) {
-                        // chão
+
+                        // // chão
 
                         tiles[xx + (yy * mapinha.getWidth())] = new Tilechao(xx * 16, yy * 16,
                                 Tile.TILE_FLOOR);
 
                     } else if (atualpix == 0xFFFFFFFF) {
                         // parede
-                        tiles[xx + (yy * mapinha.getWidth())] = new Tileparede(xx * 16, yy * 16,
-                                Tile.TILE_WALL);
+                        tiles[xx + (yy * mapinha.getWidth())] = new Tileparede(xx * 16, yy * 16, Tile.TILE_WALL);
 
                     } else if (atualpix == 0xFF0026FF) {
-                        tiles[xx + (yy * mapinha.getWidth())] = new Tilechao(xx * 16, yy * 16,
-                                Tile.TILE_FLOOR);
+                        tiles[xx + (yy * mapinha.getWidth())] = new Tilechao(xx * 16, yy * 16, Tile.TILE_FLOOR);
+
                         // player
 
                     } else {
-                        tiles[xx + (yy * mapinha.getWidth())] = new Tilechao(xx * 16, yy * 16,
-                                Tile.TILE_FLOOR);
+                        tiles[xx + (yy * mapinha.getWidth())] = new Tilechao(xx * 16, yy * 16, Tile.TILE_FLOOR);
                     }
 
                 }
