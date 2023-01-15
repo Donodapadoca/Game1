@@ -3,7 +3,7 @@ package World;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.awt.Graphics;
-
+// import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 public class Mundo {
@@ -27,15 +27,15 @@ public class Mundo {
 
                         // // chão
 
-                        tiles[xx + (yy * mapinha.getWidth())] = new Tilechao(xx * 16, yy * 16,
+                        tiles[xx + (yy * WIDTH)] = new Tilechao(xx * 16, yy * 16,
                                 Tile.TILE_FLOOR);
 
                     } else if (atualpix == 0xFFFFFFFF) {
                         // parede
-                        tiles[xx + (yy * mapinha.getWidth())] = new Tileparede(xx * 16, yy * 16, Tile.TILE_WALL);
+                        tiles[xx + (yy * WIDTH)] = new Tileparede(xx * 16, yy * 16, Tile.TILE_WALL);
 
                     } else if (atualpix == 0xFF0026FF) {
-                        tiles[xx + (yy * mapinha.getWidth())] = new Tilechao(xx * 16, yy * 16, Tile.TILE_FLOOR);
+                        tiles[xx + (yy * WIDTH)] = new Tilechao(xx * 16, yy * 16, Tile.TILE_FLOOR);
 
                         // player
 
