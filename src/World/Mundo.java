@@ -6,6 +6,13 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import Entidades.Arma;
+import Entidades.Balas;
+import Entidades.Enemy;
+import Entidades.Entity;
+import Entidades.Vida;
+import Main.Game;
+
 public class Mundo {
 
     public static Tile[] tiles;
@@ -31,21 +38,67 @@ public class Mundo {
                     } else if (atualpix == 0xFFFFFFFF) {
                         // Parede
                         tiles[xx + (yy * WIDTH)] = new Tileparede(xx * 16, yy * 16, Tile.TILE_WALL);
-                        // }else if(pixelAtual == 0xFF0026FF) {
+                    } else if (atualpix == 0xFF0026FF) {
+                        Game.player.setX(xx * 16);
+                        Game.player.setY(yy * 16);
+                        // player
+
+                    } else if (atualpix == 0xFFFF0000) {
+                        Game.entities.add(new Enemy(xx * 16, yy * 16, 16, 16, Entity.inimigo));
+                        // inimigo
+
+                    } else if (atualpix == 0xFF4CFF00) {
+                        Game.entities.add(new Vida(xx * 16, yy * 16, 16, 16, Entity.maça));
+
+                        // vida
+
+                    } else if (atualpix == 0xFF7F3F3F) {
+                        Game.entities.add(new Balas(xx * 16, yy * 16, 16, 16, Entity.bala));
+
+                        // balas
+
+                    } else if (atualpix == 0xFFFFD800) {
+                        Game.entities.add(new Arma(xx * 16, yy * 16, 16, 16, Entity.arma));
+
+                        // arma
 
                     }
-
                 }
+
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void render(Graphics g) {
+    public static boolean estalivre(int nextx, int nexty) {
+        int x1 = nextx / Game.TILE_SIZE;
+        int y1 = nexty / Game.TILE_SIZE;
 
-        for (int xx = 0; xx <= WIDTH; xx++) {
-            for (int yy = 0; yy <= HEIGHT; yy++) {
+        int x2 = (nextx + Game.TILE_SIZE - 1) / Game.TILE_SIZE;
+        int y2 = nexty / Game.TILE_SIZE;
+
+        int x3 = nextx / Game.TILE_SIZE;
+        int y3 = (nexty + Game.TILE_SIZE - 1) / Game.TILE_SIZE;
+
+        int x4 = (nextx + Game.TILE_SIZE - 1) / Game.TILE_SIZE;
+        int y4 = (nexty + Game.TILE_SIZE - 1) / Game.TILE_SIZE;
+
+        return !((tiles[x1 + (y1 * Mundo.WIDTH)] instanceof Tileparede) ||
+                (tiles[x2 + (y2 * Mundo.WIDTH)] instanceof Tileparede) ||
+                (tiles[x3 + (y3 * Mundo.WIDTH)] instanceof Tileparede) ||
+                (tiles[x4 + (y4 * Mundo.WIDTH)] instanceof Tileparede));
+
+    }
+
+    public void render(Graphics g) {
+        int xstart = Camera.x / 16;
+        int ystart = Camera.y / 16;
+
+        int xfinal = xstart + (Game.WIDTH / 16);
+        int yfinal = ystart + (Game.HEIGHT / 16);
+        for (int xx = xstart; xx <= xfinal; xx++) {
+            for (int yy = ystart; yy <= yfinal; yy++) {
                 if (xx < 0 || yy < 0 || xx >= WIDTH || yy >= HEIGHT)
                     continue;
                 Tile tile = tiles[xx + (yy * WIDTH)];

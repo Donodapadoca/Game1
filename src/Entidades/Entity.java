@@ -1,9 +1,19 @@
 package Entidades;
 
 import java.awt.image.BufferedImage;
+
+import Main.Game;
+import World.Camera;
+
 import java.awt.Graphics;
 
 public class Entity {
+
+    public static BufferedImage maça = Game.spritesheet.getSprite(6 * 16, 0, 16, 16);
+    public static BufferedImage arma = Game.spritesheet.getSprite(7 * 16, 0, 16, 16);
+    public static BufferedImage bala = Game.spritesheet.getSprite(6 * 16, 16, 16, 16);
+    public static BufferedImage inimigo = Game.spritesheet.getSprite(7 * 16, 16, 16, 16);
+
     protected double x;
     protected double y;
     protected int width;
@@ -19,15 +29,15 @@ public class Entity {
         this.sprite = sprite;
     }
 
-    // public void setX(int newX) {
-    // this.x = newX;
+    public void setX(int newX) {
+        this.x = newX;
 
-    // }
+    }
 
-    // public void setY(int newY) {
-    // this.y = newY;
+    public void setY(int newY) {
+        this.y = newY;
 
-    // }
+    }
 
     public int getX() {
         return (int) this.x;
@@ -51,7 +61,7 @@ public class Entity {
     }
 
     public void render(Graphics g) {
-        g.drawImage(sprite, this.getX(), this.getY(), null, null);
+        g.drawImage(sprite, this.getX() - Camera.x, this.getY() - Camera.y, null, null);
 
     }
 

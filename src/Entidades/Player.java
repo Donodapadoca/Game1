@@ -3,6 +3,8 @@ package Entidades;
 import java.awt.image.BufferedImage;
 
 import Main.Game;
+import World.Camera;
+import World.Mundo;
 
 import java.awt.Graphics;
 
@@ -46,26 +48,26 @@ public class Player extends Entity {
 
     public void tick() {
         move = false;
-        if (d) {
+        if (d && Mundo.estalivre((int) (x + speed), this.getY())) {
             move = true;
             dir = ddireita;
             x += speed;
 
         }
 
-        else if (a) {
+        else if (a && Mundo.estalivre((int) (x - speed), this.getY())) {
             move = true;
             dir = desquerda;
             x -= speed;
         }
 
-        if (w) {
+        if (w && Mundo.estalivre(this.getX(), (int) (y - speed))) {
             move = true;
             dir = dcima;
             y -= speed;
         }
 
-        else if (s) {
+        else if (s && Mundo.estalivre(this.getX(), (int) (y + speed))) {
             move = true;
             dir = dbaixo;
             y += speed;
@@ -79,23 +81,26 @@ public class Player extends Entity {
                     index = 0;
                 }
             }
+
+            Camera.x = Camera.clamp(this.getX() - Game.WIDTH / 2, 0, Mundo.WIDTH * 16 - Game.WIDTH);
+            Camera.y = Camera.clamp(this.getY() - Game.HEIGHT / 2, 0, Mundo.HEIGHT * 16 - Game.HEIGHT);
         }
 
     }
 
     public void render(Graphics g) {
         if (dir == ddireita) {
-            g.drawImage(direitaPlayer[index], this.getX(), this.getY(), null);
+            g.drawImage(direitaPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
 
         } else if (dir == desquerda) {
-            g.drawImage(esquerdaPlayer[index], this.getX(), this.getY(), null);
+            g.drawImage(esquerdaPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
         }
         if (dir == dcima) {
-            g.drawImage(cimaPlayer[index], this.getX(), this.getY(), null);
+            g.drawImage(cimaPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
 
         }
         if (dir == dbaixo) {
-            g.drawImage(baixoPlayer[index], this.getX(), this.getY(), null);
+            g.drawImage(baixoPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
 
         }
 

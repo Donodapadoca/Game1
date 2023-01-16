@@ -22,19 +22,20 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     // private BufferedImage[] player;
 
-    private final int WIDTH = 160;
-    private final int HEIGHT = 120;
+    public final static int WIDTH = 320;
+    public final static int HEIGHT = 240;
     private final int SCALE = 3;
+    public static final int TILE_SIZE = 16;
 
     private boolean isRunning = true;
 
     private BufferedImage image;
-    public List<Entity> entities;
+    public static List<Entity> entities;
     public static Spritesheet spritesheet;
     public static Spritesheet map;
     public static Mundo mundo;
 
-    private Player player;
+    public static Player player;
 
     public Game() {
 
