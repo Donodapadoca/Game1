@@ -43,11 +43,11 @@ public class Game extends Canvas implements Runnable, KeyListener {
         initFrame();
         image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         entities = new ArrayList<Entity>();
-        map = new Spritesheet("/mapsprite.png");
+
         spritesheet = new Spritesheet("/spritesheet.png");
         player = new Player(0, 0, 16, 16, spritesheet.getSprite(32, 0, 16, 16));
         entities.add(player);
-        mundo = new Mundo("/maap.png");
+        mundo = new Mundo("/mapinha1.png");
 
     }
 

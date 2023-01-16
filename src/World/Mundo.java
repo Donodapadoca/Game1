@@ -1,14 +1,16 @@
 package World;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.awt.Graphics;
-// import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 
 public class Mundo {
-    private Tile[] tiles;
+
+    public static Tile[] tiles;
     public static int WIDTH, HEIGHT;
+    // public static final int TILE_SIZE = 16;
 
     public Mundo(String path) {
         try {
@@ -22,45 +24,34 @@ public class Mundo {
             for (int xx = 0; xx < mapinha.getWidth(); xx++) {
                 for (int yy = 0; yy < mapinha.getHeight(); yy++) {
                     int atualpix = pix[xx + (yy * mapinha.getWidth())];
-
+                    tiles[xx + (yy * WIDTH)] = new Tilechao(xx * 16, yy * 16, Tile.TILE_FLOOR);
                     if (atualpix == 0xFF000000) {
-
-                        // // chão
-
-                        tiles[xx + (yy * WIDTH)] = new Tilechao(xx * 16, yy * 16,
-                                Tile.TILE_FLOOR);
-
-                    } else if (atualpix == 0xFFFFFFFF) {
-                        // parede
-                        tiles[xx + (yy * WIDTH)] = new Tileparede(xx * 16, yy * 16, Tile.TILE_WALL);
-
-                    } else if (atualpix == 0xFF0026FF) {
+                        // Floor
                         tiles[xx + (yy * WIDTH)] = new Tilechao(xx * 16, yy * 16, Tile.TILE_FLOOR);
+                    } else if (atualpix == 0xFFFFFFFF) {
+                        // Parede
+                        tiles[xx + (yy * WIDTH)] = new Tileparede(xx * 16, yy * 16, Tile.TILE_WALL);
+                        // }else if(pixelAtual == 0xFF0026FF) {
 
-                        // player
-
-                    } else {
-                        tiles[xx + (yy * mapinha.getWidth())] = new Tilechao(xx * 16, yy * 16, Tile.TILE_FLOOR);
                     }
 
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void render(Graphics g) {
-        for (int xx = 0; xx < WIDTH; xx++) {
-            for (int yy = 0; yy > HEIGHT; yy++) {
+
+        for (int xx = 0; xx <= WIDTH; xx++) {
+            for (int yy = 0; yy <= HEIGHT; yy++) {
+                if (xx < 0 || yy < 0 || xx >= WIDTH || yy >= HEIGHT)
+                    continue;
                 Tile tile = tiles[xx + (yy * WIDTH)];
                 tile.render(g);
-
             }
         }
-
     }
 
 }
