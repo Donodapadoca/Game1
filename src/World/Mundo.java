@@ -17,7 +17,7 @@ public class Mundo {
 
     public static Tile[] tiles;
     public static int WIDTH, HEIGHT;
-    // public static final int TILE_SIZE = 16;
+    public static final int TILE_SIZE = 16;
 
     public Mundo(String path) {
         try {
@@ -44,7 +44,10 @@ public class Mundo {
                         // player
 
                     } else if (atualpix == 0xFFFF0000) {
-                        Game.entities.add(new Enemy(xx * 16, yy * 16, 16, 16, Entity.inimigo));
+
+                        Enemy en = new Enemy(xx * 16, yy * 16, 16, 16, Entity.inimigo);
+                        Game.entities.add(en);
+                        Game.inimigos.add(en);
                         // inimigo
 
                     } else if (atualpix == 0xFF4CFF00) {
